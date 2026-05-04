@@ -1296,40 +1296,140 @@ body.light-mode .about-dot {
   position: absolute;
   bottom: 25px;
   left: 25px;
-  z-index: 2;
-  background: rgba(26, 18, 8, 0.7);
+  z-index: 3;
+  background: linear-gradient(135deg, rgba(212, 165, 116, 0.25), rgba(139, 111, 71, 0.18));
   backdrop-filter: blur(20px);
-  border: 1px solid var(--accentColor);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid var(--accentColor);
   border-radius: 16px;
-  padding: 18px 24px;
+  padding: 14px 20px;
   display: flex;
   align-items: center;
   gap: 14px;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(212, 165, 116, 0.25),
+    inset 0 1px 2px rgba(255, 255, 255, 0.15);
+  animation: badgePulse 3s ease-in-out infinite;
+  position: absolute;
+  overflow: hidden;
+}
+
+.about-image-badge::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.18) 50%, transparent 60%);
+  transform: translateX(-100%);
+  transition: 0.8s;
+  pointer-events: none;
+}
+
+.about-image-badge:hover::before {
+  transform: translateX(100%);
+}
+
+@keyframes badgePulse {
+  0%, 100% {
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.4),
+      0 0 20px rgba(212, 165, 116, 0.25),
+      inset 0 1px 2px rgba(255, 255, 255, 0.15);
+  }
+  50% {
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.4),
+      0 0 30px rgba(212, 165, 116, 0.5),
+      inset 0 1px 2px rgba(255, 255, 255, 0.2);
+  }
 }
 
 .about-image-badge .badge-icon {
-  width: 50px; height: 50px;
-  background: var(--accentColor);
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--accentColor), var(--darkAccent));
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 22px;
   color: #1a1208;
+  box-shadow: 0 4px 12px rgba(212, 165, 116, 0.5);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.about-image-badge .badge-info {
+  position: relative;
+  z-index: 1;
 }
 
 .about-image-badge .badge-info h5 {
   font-family: var(--mainFont);
-  font-size: 26px;
+  font-size: 28px;
   color: #fff;
   line-height: 1;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  margin-bottom: 2px;
+}
+
+.about-image-badge .badge-info h5 em {
+  font-style: normal;
+  color: var(--accentColor);
 }
 
 .about-image-badge .badge-info p {
-  font-family: var(--serifFont);
-  font-size: 14px;
-  color: var(--accentLight);
-  font-style: italic;
+  font-family: var(--mainFont);
+  font-size: 11px;
+  color: var(--accentColor);
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  opacity: 0.95;
+}
+
+/* Light mode for badge */
+body.light-mode .about-image-badge {
+  background: linear-gradient(135deg, rgba(212, 165, 116, 0.5), rgba(139, 111, 71, 0.35));
+  border-color: var(--darkAccent);
+}
+
+body.light-mode .about-image-badge .badge-info h5 {
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(139, 111, 71, 0.5);
+}
+
+body.light-mode .about-image-badge .badge-info p {
+  color: #fff;
+}
+
+body.light-mode .about-image-badge .badge-icon {
+  color: #fff;
+}
+
+/* Mobile: smaller badge */
+@media (max-width: 640px) {
+  .about-image-badge {
+    bottom: 15px;
+    left: 15px;
+    padding: 12px 18px;
+    gap: 12px;
+  }
+  .about-image-badge .badge-icon {
+    width: 46px;
+    height: 46px;
+    font-size: 20px;
+  }
+  .about-image-badge .badge-info h5 {
+    font-size: 24px;
+  }
+  .about-image-badge .badge-info p {
+    font-size: 12px;
+  }
 }
 
 .about-text .sm-title {
@@ -1479,21 +1579,52 @@ body.light-mode .about-dot {
   top: -32px;
   left: 50%;
   transform: translateX(-50%);
-  width: 64px; height: 64px;
-  background: linear-gradient(135deg, var(--accentColor), var(--darkAccent));
+  width: 68px;
+  height: 68px;
+  background: linear-gradient(135deg, rgba(212, 165, 116, 0.35), rgba(139, 111, 71, 0.25));
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
-  color: #1a1208;
-  border: 4px solid #1a1208;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  font-size: 26px;
+  color: var(--accentColor);
+  border: 2px solid var(--accentColor);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(212, 165, 116, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.15);
   transition: var(--transition);
+  overflow: hidden;
+}
+
+.menu-cat-icon-bubble::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.25) 50%, transparent 60%);
+  transform: translateX(-100%);
+  transition: 0.7s;
+}
+
+.menu-cat-icon-bubble i {
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
 }
 
 .menu-cat-card:hover .menu-cat-icon-bubble {
-  transform: translateX(-50%) rotate(360deg);
+  transform: translateX(-50%) rotate(360deg) scale(1.08);
+  background: linear-gradient(135deg, rgba(212, 165, 116, 0.5), rgba(139, 111, 71, 0.4));
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(212, 165, 116, 0.55),
+    inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+.menu-cat-card:hover .menu-cat-icon-bubble::before {
+  transform: translateX(100%);
 }
 
 .menu-cat-content h3 {
@@ -3362,7 +3493,13 @@ body.light-mode .menu-cat-content h3 { color: var(--textPrimary); }
 body.light-mode .menu-cat-content p { color: var(--textSecondary); }
 
 body.light-mode .menu-cat-icon-bubble {
-  border-color: #f5e9d4;
+  background: linear-gradient(135deg, rgba(212, 165, 116, 0.5), rgba(139, 111, 71, 0.35));
+  border-color: var(--darkAccent);
+  color: var(--darkAccent);
+  box-shadow:
+    0 8px 24px rgba(139, 111, 71, 0.3),
+    0 0 20px rgba(212, 165, 116, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4);
 }
 
 body.light-mode section .store .product .content h2 { color: var(--textPrimary); }
@@ -4332,11 +4469,20 @@ body.light-mode .offers-countdown-banner .countdown-item .label {
   height: 100%;
   background-size: cover;
   background-position: center;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 1s ease, transform 6s ease;
+  opacity: 0;
+  transform: scale(1.05);
 }
 
-.offer-bento-card:hover .offer-bento-img {
-  transform: scale(1.08);
+.offer-bento-img.active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
+
+.offer-bento-card:hover .offer-bento-img.active {
+  transform: scale(1.1);
+  transition: transform 0.8s ease;
 }
 
 .offer-bento-card::before {
@@ -4568,7 +4714,7 @@ body.light-mode .offers-countdown-banner .countdown-item .label {
 @media (max-width: 991px) {
   .offers-bento {
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 250px 250px 250px;
+    grid-template-rows: 250px 250px;
     gap: 18px;
   }
 
@@ -4596,7 +4742,7 @@ body.light-mode .offers-countdown-banner .countdown-item .label {
 @media (max-width: 640px) {
   .offers-bento {
     grid-template-columns: 1fr;
-    grid-template-rows: 280px 220px 220px 220px;
+    grid-template-rows: 300px 240px 240px;
     gap: 15px;
   }
 
@@ -4987,3 +5133,208 @@ body.light-mode .testi-counter span.current {
     left: 24px;
   }
 }
+
+/* ==============================
+   OFFER ITEM NAME + DOTS
+============================== */
+.offer-item-info {
+  margin-bottom: 8px;
+}
+
+.offer-item-name {
+  display: inline-block;
+  font-family: var(--mainFont);
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: var(--accentColor);
+  text-transform: uppercase;
+  font-weight: 500;
+  background: rgba(212, 165, 116, 0.15);
+  border: 1px solid rgba(212, 165, 116, 0.4);
+  padding: 4px 14px;
+  border-radius: 20px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.offer-bento-card.featured .offer-item-name {
+  font-size: 20px;
+  padding: 5px 18px;
+}
+
+/* Animation when changing */
+.offer-item-name.changing,
+.new-price.changing,
+.old-price.changing {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.new-price,
+.old-price {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Dots */
+.offer-bento-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  padding: 8px 14px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+  border: 1px solid var(--borderGlass);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.offer-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-block;
+}
+
+.offer-dot.active {
+  background: var(--accentColor);
+  width: 28px;
+  border-radius: 5px;
+  box-shadow: 0 0 8px rgba(212, 165, 116, 0.6);
+}
+
+.offer-dot:hover {
+  background: var(--accentLight);
+  transform: scale(1.2);
+}
+
+.offer-dot.active:hover {
+  transform: none;
+}
+
+/* Light mode for dots */
+body.light-mode .offer-bento-dots {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+body.light-mode .offer-dot {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+body.light-mode .offer-item-name {
+  background: rgba(212, 165, 116, 0.25);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Mobile dots adjustment */
+@media (max-width: 640px) {
+  .offer-bento-dots {
+    margin-top: 10px;
+    padding: 6px 12px;
+  }
+
+  .offer-dot {
+    width: 7px;
+    height: 7px;
+  }
+
+  .offer-dot.active {
+    width: 24px;
+  }
+
+  .offer-item-name {
+    font-size: 15px;
+    padding: 3px 11px;
+    letter-spacing: 1.5px;
+  }
+
+  .offer-bento-card.featured .offer-item-name {
+    font-size: 17px;
+    padding: 4px 14px;
+  }
+}
+
+/* ==============================
+   FINAL POLISH IMPROVEMENTS
+============================== */
+
+/* Smooth image loading - fade in when loaded */
+img {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+img.loaded,
+img[src*="data:"],
+.about-img,
+.menu-cat-img img,
+.product-img-wrap img,
+.special-image img,
+.news-img img,
+.sidebar-item-img img {
+  opacity: 1;
+}
+
+/* When image fully loaded via JS */
+img[data-loaded="true"] {
+  opacity: 1;
+}
+
+/* Better focus styles for accessibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+[onclick]:focus-visible {
+  outline: 2px solid var(--accentColor);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Remove focus on click for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Better tap highlight on mobile */
+* {
+  -webkit-tap-highlight-color: rgba(212, 165, 116, 0.2);
+}
+
+/* Smoother form interactions */
+input, button, textarea, select {
+  font-family: inherit;
+}
+
+/* Print styles */
+@media print {
+  .navbar-wrapper,
+  .scroll-down,
+  .scroll-top,
+  .sidebar-panel,
+  .cart-overlay,
+  .toast,
+  .coffee-bean-decor,
+  .bg-orb {
+    display: none !important;
+  }
+  body::before, body::after { display: none !important; }
+  body { background: #fff !important; color: #000 !important; }
+}
+
+/* Performance optimization for animations */
+.coffee-bean-decor,
+.smoke-cloud,
+.about-img,
+.offer-bento-img,
+.scroll-down-inner {
+  will-change: transform, opacity;
+}
+
+/* Prevent layout shift from beans */
+section, footer { contain: layout; }
