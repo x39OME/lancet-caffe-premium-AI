@@ -1414,21 +1414,26 @@ body.light-mode .about-image-badge .badge-icon {
 /* Mobile: smaller badge */
 @media (max-width: 640px) {
   .about-image-badge {
-    bottom: 15px;
-    left: 15px;
-    padding: 12px 18px;
-    gap: 12px;
+    bottom: 12px;
+    left: 12px;
+    padding: 8px 12px;
+    gap: 8px;
+    border-radius: 12px;
   }
   .about-image-badge .badge-icon {
-    width: 46px;
-    height: 46px;
-    font-size: 20px;
+    width: 36px;
+    height: 36px;
+    font-size: 15px;
+    border-radius: 9px;
   }
   .about-image-badge .badge-info h5 {
-    font-size: 24px;
+    font-size: 18px;
+    margin-bottom: 0;
+    letter-spacing: 1px;
   }
   .about-image-badge .badge-info p {
-    font-size: 12px;
+    font-size: 9px;
+    letter-spacing: 1.8px;
   }
 }
 
@@ -3493,13 +3498,13 @@ body.light-mode .menu-cat-content h3 { color: var(--textPrimary); }
 body.light-mode .menu-cat-content p { color: var(--textSecondary); }
 
 body.light-mode .menu-cat-icon-bubble {
-  background: linear-gradient(135deg, rgba(212, 165, 116, 0.5), rgba(139, 111, 71, 0.35));
+  background: linear-gradient(135deg, var(--accentColor), var(--darkAccent));
   border-color: var(--darkAccent);
-  color: var(--darkAccent);
+  color: #fff;
   box-shadow:
-    0 8px 24px rgba(139, 111, 71, 0.3),
-    0 0 20px rgba(212, 165, 116, 0.4),
-    inset 0 1px 2px rgba(255, 255, 255, 0.4);
+    0 8px 24px rgba(139, 111, 71, 0.35),
+    0 0 20px rgba(212, 165, 116, 0.45),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
 body.light-mode section .store .product .content h2 { color: var(--textPrimary); }
@@ -4764,8 +4769,35 @@ body.light-mode .offers-countdown-banner .countdown-item .label {
   }
 
   .offer-bento-card.featured .offer-bento-discount {
-    width: 75px;
-    height: 75px;
+    width: 56px;
+    height: 56px;
+    top: 14px;
+    right: 14px;
+  }
+
+  .offer-bento-discount {
+    width: 50px;
+    height: 50px;
+    top: 12px;
+    right: 12px;
+    border-width: 2px;
+  }
+
+  .offer-bento-discount .discount-num {
+    font-size: 14px;
+  }
+
+  .offer-bento-card.featured .offer-bento-discount .discount-num {
+    font-size: 17px;
+  }
+
+  .offer-bento-discount .discount-label {
+    font-size: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .offer-bento-card.featured .offer-bento-discount .discount-label {
+    font-size: 9px;
   }
 
   .offers-countdown-banner {
