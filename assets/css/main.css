@@ -278,6 +278,17 @@ img { max-width: 100%; display: block; }
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
+.nav .navbar {
+  display: flex;
+  align-items: center;
+}
+
+/* Hide mobile-only buttons on desktop */
+.mobile-theme-toggle,
+#toggleMenu {
+  display: none;
+}
+
 .nav .navbar #navigation {
   display: flex;
   justify-content: center;
@@ -661,11 +672,113 @@ footer .coffee-bean-decor.bean-3 { top: 85%; left: 6%;  width: 40px; animation-d
 
 /* MOBILE MENU */
 @media (max-width: 991px) {
-  .nav { padding: 10px 16px; }
+  /* Reduce wrapper padding on mobile */
+  .navbar-wrapper {
+    padding: 0 10px;
+  }
 
-  #toggleMenu {
+  /* Compact navbar on mobile */
+  .nav {
+    padding: 8px 12px !important;
+  }
+
+  .navbar-wrapper.scrolled .nav {
+    padding: 6px 12px !important;
+  }
+
+  /* Compact logo on mobile */
+  .nav .logo {
+    padding: 4px 4px;
+    gap: 10px;
+  }
+
+  .nav .logo .logo-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .nav .logo .logo-svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .nav .logo .logo-name {
+    font-size: 18px;
+    letter-spacing: 1.5px;
+  }
+
+  .nav .logo .logo-tag { display: none; }
+
+  /* Mobile navbar buttons wrapper */
+  .nav .navbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Mobile Theme Toggle (visible on mobile only, beside menu) */
+  .mobile-theme-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--bgColor);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--borderGlass);
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--accentColor);
+    font-size: 15px;
+    transition: var(--transition);
     position: relative;
-    width: 44px; height: 44px;
+    overflow: hidden;
+    flex-shrink: 0;
+    padding: 0;
+  }
+
+  .mobile-theme-toggle:hover {
+    border-color: var(--accentColor);
+    background: rgba(212, 165, 116, 0.15);
+  }
+
+  .mobile-theme-toggle .theme-icon {
+    position: absolute;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    color: var(--accentColor);
+  }
+
+  .mobile-theme-toggle .icon-moon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+
+  .mobile-theme-toggle .icon-sun {
+    opacity: 0;
+    transform: rotate(-180deg) scale(0);
+  }
+
+  body.light-mode .mobile-theme-toggle .icon-moon {
+    opacity: 0;
+    transform: rotate(180deg) scale(0);
+  }
+
+  body.light-mode .mobile-theme-toggle .icon-sun {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+
+  /* Hide desktop theme toggle on mobile */
+  .desktop-theme-toggle {
+    display: none !important;
+  }
+
+  /* Mobile menu hamburger (using ::before/::after) */
+  #toggleMenu {
+    display: flex !important;
+    position: relative;
+    width: 40px;
+    height: 40px;
     background: var(--bgColor);
     backdrop-filter: blur(15px);
     border: 1px solid var(--borderGlass);
@@ -677,6 +790,7 @@ footer .coffee-bean-decor.bean-3 { top: 85%; left: 6%;  width: 40px; animation-d
     align-items: center;
     z-index: 1000;
     transition: var(--transition);
+    flex-shrink: 0;
   }
 
   #toggleMenu:hover {
@@ -687,10 +801,11 @@ footer .coffee-bean-decor.bean-3 { top: 85%; left: 6%;  width: 40px; animation-d
   #toggleMenu::before {
     content: '';
     position: absolute;
-    width: 22px; height: 2px;
+    width: 20px;
+    height: 2px;
     background: var(--accentColor);
-    transform: translateY(-7px);
-    box-shadow: 0 7px var(--accentColor);
+    transform: translateY(-6px);
+    box-shadow: 0 6px var(--accentColor);
     transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 2px;
   }
@@ -698,25 +813,26 @@ footer .coffee-bean-decor.bean-3 { top: 85%; left: 6%;  width: 40px; animation-d
   #toggleMenu::after {
     content: '';
     position: absolute;
-    width: 22px; height: 2px;
+    width: 20px;
+    height: 2px;
     background: var(--accentColor);
-    transform: translateY(7px);
-    box-shadow: 0 -7px var(--accentColor);
+    transform: translateY(6px);
+    box-shadow: 0 -6px var(--accentColor);
     transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 2px;
   }
 
   #toggleMenu.active::before {
     transform: translateY(0px) rotate(45deg);
-    box-shadow: 0 0 var(--bgColor);
+    box-shadow: 0 0 transparent;
   }
 
   #toggleMenu.active::after {
     transform: translateY(0px) rotate(-45deg);
-    box-shadow: 0 0 var(--bgColor);
+    box-shadow: 0 0 transparent;
   }
 
-  /* Mobile Menu Drawer - improved */
+  /* Mobile Menu Drawer */
   .nav .navbar #navigation {
     position: fixed;
     top: 0;
@@ -735,7 +851,6 @@ footer .coffee-bean-decor.bean-3 { top: 85%; left: 6%;  width: 40px; animation-d
     border: none;
     border-left: 1px solid var(--borderGlass);
     border-radius: 0;
-    height: 100vh;
     overflow-y: auto;
     transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 90px 0 30px;
@@ -747,7 +862,6 @@ footer .coffee-bean-decor.bean-3 { top: 85%; left: 6%;  width: 40px; animation-d
     right: 0;
   }
 
-  /* Mobile menu header decoration */
   .nav .navbar #navigation::before {
     content: 'MENU';
     position: absolute;
@@ -820,7 +934,6 @@ footer .coffee-bean-decor.bean-3 { top: 85%; left: 6%;  width: 40px; animation-d
     transform: translateX(0);
   }
 
-  /* Shopping icons row - bottom */
   .nav .navbar #navigation .shopping {
     width: 100%;
     margin: 25px 0 0;
@@ -836,6 +949,11 @@ footer .coffee-bean-decor.bean-3 { top: 85%; left: 6%;  width: 40px; animation-d
     font-size: 16px;
     background: rgba(212, 165, 116, 0.1);
     border-color: rgba(212, 165, 116, 0.3);
+  }
+
+  /* Hide desktop theme toggle inside menu drawer */
+  .nav .navbar #navigation .shopping .desktop-theme-toggle {
+    display: none !important;
   }
 
   /* Mobile menu overlay */
@@ -855,7 +973,7 @@ footer .coffee-bean-decor.bean-3 { top: 85%; left: 6%;  width: 40px; animation-d
     pointer-events: all;
   }
 
-  /* Light mode for mobile menu */
+  /* Light mode mobile drawer */
   body.light-mode .nav .navbar #navigation {
     background: linear-gradient(180deg, rgba(255, 245, 230, 0.97) 0%, rgba(245, 222, 198, 0.97) 100%);
     border-left-color: rgba(212, 165, 116, 0.3);
@@ -869,8 +987,47 @@ footer .coffee-bean-decor.bean-3 { top: 85%; left: 6%;  width: 40px; animation-d
     border-bottom-color: rgba(139, 111, 71, 0.1);
   }
 
-  .nav .logo .logo-tag { display: none; }
-  .nav .logo .logo-name { font-size: 20px; }
+  /* Light mode buttons more visible */
+  body.light-mode #toggleMenu,
+  body.light-mode .mobile-theme-toggle {
+    background: rgba(255, 255, 255, 0.55);
+    border-color: var(--accentColor);
+  }
+
+  body.light-mode #toggleMenu::before,
+  body.light-mode #toggleMenu::after {
+    background: var(--darkAccent);
+    box-shadow-color: var(--darkAccent);
+  }
+
+  body.light-mode #toggleMenu::before {
+    box-shadow: 0 6px var(--darkAccent);
+  }
+
+  body.light-mode #toggleMenu::after {
+    box-shadow: 0 -6px var(--darkAccent);
+  }
+
+  body.light-mode .mobile-theme-toggle .theme-icon {
+    color: var(--darkAccent);
+  }
+
+  body.light-mode #toggleMenu:hover,
+  body.light-mode .mobile-theme-toggle:hover {
+    background: var(--accentColor);
+  }
+
+  body.light-mode #toggleMenu:hover::before,
+  body.light-mode #toggleMenu:hover::after {
+    background: #fff;
+  }
+
+  body.light-mode #toggleMenu:hover::before { box-shadow: 0 6px #fff; }
+  body.light-mode #toggleMenu:hover::after  { box-shadow: 0 -6px #fff; }
+
+  body.light-mode .mobile-theme-toggle:hover .theme-icon {
+    color: #fff;
+  }
 }
 
 @media (max-width: 480px) {
@@ -884,26 +1041,42 @@ footer .coffee-bean-decor.bean-3 { top: 85%; left: 6%;  width: 40px; animation-d
   }
 
   .nav .logo .logo-icon {
-    width: 44px;
-    height: 44px;
+    width: 38px;
+    height: 38px;
   }
 
   .nav .logo .logo-svg {
-    width: 26px;
-    height: 26px;
+    width: 22px;
+    height: 22px;
   }
 
   .nav .logo .logo-name {
-    font-size: 18px;
-    letter-spacing: 1.5px;
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
+
+  #toggleMenu,
+  .mobile-theme-toggle {
+    width: 38px;
+    height: 38px;
+  }
+
+  .navbar-wrapper {
+    padding: 0 8px;
+    top: 10px;
+  }
+
+  .nav {
+    padding: 6px 10px !important;
   }
 }
 
 @media (max-width: 767px) {
   .hero-content h1 { font-size: 56px; }
   .hero-content p.hero-desc { font-size: 18px; }
-  .navbar-wrapper { top: 12px; padding: 0 12px; }
 }
+
+
 
 /* Loading slider */
 .slider {
@@ -2737,6 +2910,11 @@ footer {
 /* ==============================
    THEME TOGGLE BUTTON
 ============================== */
+/* Hide mobile theme toggle on desktop */
+.mobile-theme-toggle {
+  display: none;
+}
+
 .theme-toggle {
   position: relative;
   width: 40px;
